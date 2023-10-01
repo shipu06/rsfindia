@@ -1,8 +1,7 @@
 import React from 'react';
-import { Card, CardHeader, CardBody, Heading, Text, Image, Progress } from '@chakra-ui/react'
+import { Card, CardHeader, CardBody, Heading, Text, Image, Progress, Stack } from '@chakra-ui/react'
 
 const CardComponent = ({ type }) => {
-	console.log(type, type === 'fundraiser')
 	return (
 		<Card maxW='md' overflow={'hidden'}>
 			<Image
@@ -18,7 +17,13 @@ const CardComponent = ({ type }) => {
 			<CardBody>
 				{
 					type === 'fundraiser' ? (
-						<Progress hasStripe value={64} colorScheme='green' borderRadius={'6px'} />
+						<Stack>
+							<Progress hasStripe value={64} colorScheme='green' borderRadius={'6px'} />
+							<Stack display={'flex'} flexDirection='row' justifyContent='space-between' >
+								<Text>Raised: 10000</Text>
+								<Text>Goal : 100000</Text>
+							</Stack>
+						</Stack>
 					) : (
 						<Text>
 							With Chakra UI, I wanted to sync the speed of development with the speed

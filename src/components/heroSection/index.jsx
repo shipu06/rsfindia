@@ -14,8 +14,15 @@ import {
 	createIcon,
 	useColorModeValue,
 } from '@chakra-ui/react'
+import { increaseCounter } from './../../redux-store/action/counter.action'
+import { useDispatch } from 'react-redux'
 
 export default function HeroSection() {
+	const dispatch = useDispatch()
+	const handleClick = () => {
+		console.log('hello');
+		dispatch(increaseCounter())
+	}
 	return (
 		<Container maxW={'7xl'} h={'70vh'} display={'flex'} alignItems={'center'}>
 			<Stack
@@ -61,7 +68,9 @@ export default function HeroSection() {
 							px={6}
 							colorScheme={'red'}
 							bg={'red.400'}
-							_hover={{ bg: 'red.500' }}>
+							_hover={{ bg: 'red.500' }}
+							onClick={handleClick}
+						>
 							Get started
 						</Button>
 						<Button
