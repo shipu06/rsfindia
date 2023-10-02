@@ -4,25 +4,33 @@ import Counter from '../counter';
 
 const DisplayBar = () => {
 	const bgColor = useColorModeValue('gray.100', 'gray.800');
+	const data = [
+		{
+			count: 10,
+			text: 'Child Education Adopted'
+		},
+		{
+			count: 450,
+			text: 'Food Packets Served'
+		},
+		{
+			count: 100,
+			text: 'Tree Planted and Protected'
+		},
+		{
+			count: 8,
+			text: 'Social Awareness Campaign'
+		},
+
+	]
 	return (
 		<Container maxW={'100vw'} bg={bgColor} h="20vh" justifyContent={'center'} display={'flex'} >
 			<Stack display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-around'} w={'8xl'}>
-				<Stack alignItems={'center'}>
-					<Counter finalNumber={10} />center
-					<Text>Child Education Adopted</Text>
-				</Stack>
-				<Stack alignItems={'center'}>
-					<Counter finalNumber={1000} />
-					<Text>Food Packets Served</Text>
-				</Stack>
-				<Stack alignItems={'center'}>
-					<Counter finalNumber={10} />
-					<Text>Tree Planted and Protected</Text>
-				</Stack>
-				<Stack alignItems={'center'}>
-					<Counter finalNumber={10} />
-					<Text>Social Awareness Campaign</Text>
-				</Stack>
+				{
+					data.map((item, index) => (
+						<Counter key={index} finalNumber={item.count} text={item.text} />
+					))
+				}
 			</Stack>
 		</Container>
 	)

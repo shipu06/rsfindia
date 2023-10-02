@@ -1,35 +1,38 @@
 import React from 'react';
 import { Card, CardHeader, CardBody, Heading, Text, Image, Progress, Stack } from '@chakra-ui/react'
 
-const CardComponent = ({ type }) => {
+const CardComponent = ({ key, type, image, title, description }) => {
+	console.log(type, 'this is type')
 	return (
-		<Card maxW='md' overflow={'hidden'}>
+		<Card maxW='md' overflow={'hidden'} width={'22rem'} key={key} h={type === 'fundraiser' ? '54vh' : '45vh'}>
 			<Image
 				objectFit='cover'
-				src='https://plus.unsplash.com/premium_photo-1663040178972-ee1d45d33899?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNoYXJpdHl8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60'
+				src={image}
 				alt='Chakra UI'
+				height={type === 'member' ? '22rem' : '15rem'}
 			/>
-			<CardHeader>
-				<Heading as="h3" fontSize="2xl" fontWeight="bold">
-					What We Are Doing
+			<CardHeader p={'0px'}>
+				<Heading as="h3" fontSize="2xl" fontWeight="bold" p={'0.7rem 1.25rem 0.5rem'} color={'red.400'}>
+					{title}
 				</Heading>
 			</CardHeader>
-			<CardBody>
+			<CardBody p={'0.4rem 1.25rem 0rem'} >
 				{
 					type === 'fundraiser' ? (
 						<Stack>
-							<Progress hasStripe value={64} colorScheme='green' borderRadius={'6px'} />
-							<Stack display={'flex'} flexDirection='row' justifyContent='space-between' >
+							<Text fontSize={'16px'}>{"Anuj Singh, a remarkable student currently in the seventh grade. Anuj's academic journey is a shining example of dedication and intelligence."}</Text>
+							<Progress value={64} colorScheme='green' borderRadius={'6px'} my={'1rem'} />
+							<Stack display={'flex'} flexDirection='row' justifyContent='space-between' my={'1rem'}>
 								<Text>Raised: 10000</Text>
 								<Text>Goal : 100000</Text>
 							</Stack>
 						</Stack>
 					) : (
-						<Text>
-							With Chakra UI, I wanted to sync the speed of development with the speed
-							of design. I wanted the developer to be just as excited as the designer to
-							create a screen.
-						</Text>
+						type === 'member' ? (
+							<Text fontSize={'14px'}>{null}</Text>
+						) : (
+							<Text fontSize={'14px'}>{description}</Text>
+						)
 					)
 				}
 			</CardBody>
