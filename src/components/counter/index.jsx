@@ -1,6 +1,7 @@
+import { Stack, Text } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 
-function Counter({ finalNumber }) {
+function Counter({ key, finalNumber, text }) {
 	const [number, setNumber] = useState(2);
 
 	useEffect(() => {
@@ -16,8 +17,10 @@ function Counter({ finalNumber }) {
 	}, [number, finalNumber]);
 
 	return (
-
-		<h1>{number}</h1>
+		<Stack alignItems={'center'} key={key}>
+			<Text fontSize={'2.5rem'} fontWeight={800} letterSpacing={'3px'} color={'red.400'}>{number}+</Text>
+			<Text fontSize={'1rem'}>{text}</Text>
+		</Stack>
 	);
 }
 

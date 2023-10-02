@@ -1,28 +1,26 @@
 import './App.css';
-import { ChakraProvider } from '@chakra-ui/react'
-import Navbar from './components/navbar';
-import HeroSection from './components/heroSection';
-import OurGoal from './components/ourGoal';
-import AboutUs from './components/aboutUs';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Fundraiser from './components/fundraiser';
 import AllMember from './components/member';
-import DisplayBar from './components/display';
+import Navbar from './components/navbar';
 import Footer from './components/footer';
+import { Container } from '@chakra-ui/react';
+import Homepage from './pages/homepage';
+
 
 function App() {
   return (
-    <ChakraProvider>
-      <div className="App">
-        <Navbar />
-        <HeroSection />
-        <OurGoal />
-        <AboutUs />
-        <Fundraiser />
-        <AllMember />
-        <DisplayBar />
+    <Router>
+      <Navbar />
+      <Container className='container' maxW={'100%'} m={'0px'} p={'0px'} mt={'6vh'} >
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/fundraiser" element={<Fundraiser />} />
+          <Route path="*" element={<AllMember />} />
+        </Routes>
         <Footer />
-      </div>
-    </ChakraProvider>
+      </Container>
+    </Router>
   );
 }
 
