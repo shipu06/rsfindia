@@ -16,6 +16,7 @@ import {
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 // import './styles.css';
 
 
@@ -23,8 +24,6 @@ const Links = [
 	{ text: 'Home', url: '/' },
 	{ text: 'About', url: '/about' },
 	{ text: 'Latest Cause', url: '/latest-cause' },
-	{ text: 'Social Events', url: '/social-event' },
-	{ text: 'Blog', url: '/blog' },
 	{ text: 'Contact', url: '/contact' },
 ]
 
@@ -48,8 +47,12 @@ const NavLink = (props) => {
 }
 
 export default function Navbar() {
+	const navigate = useNavigate();
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const [flag, setFlag] = useState(true)
+	const handleClick = (link) => {
+		navigate(link)
+	}
 
 	return (
 		<>
@@ -65,8 +68,8 @@ export default function Navbar() {
 					<HStack spacing={8} alignItems={'center'} width={'96%'} justifyContent={'space-between'}>
 						<Box fontSize={'40px'} ml={'45px'} color="var(--heading-text-colors)" fontWeight={'900'}>R.S Foundation</Box>
 						<HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-							{Links.map((link) => (
-								<NavLink key={link}>{link}</NavLink>
+							{Links.map((link, index) => (
+								<NavLink key={index} onClick={() => handleClick(link)}>{link}</NavLink>
 							))}
 						</HStack>
 					</HStack>
@@ -121,8 +124,8 @@ export default function Navbar() {
 				{isOpen ? (
 					<Box pb={4} display={{ md: 'none' }}>
 						<Stack as={'nav'} spacing={4}>
-							{Links.map((link) => (
-								<NavLink key={link}>{link}</NavLink>
+							{Links.map((link, index) => (
+								<NavLink key={index} onClick={() => handleClick(link)}>{link}</NavLink>
 							))}
 						</Stack>
 					</Box>

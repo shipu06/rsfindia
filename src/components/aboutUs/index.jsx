@@ -15,7 +15,7 @@ import {
 	useColorModeValue,
 } from '@chakra-ui/react'
 
-export default function AboutUs() {
+export default function About() {
 	return (
 		<Container maxW={'7xl'} h={'70vh'} display={'flex'} alignItems={'center'}>
 			<Stack

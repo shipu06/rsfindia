@@ -1,26 +1,28 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Fundraiser from './components/fundraiser';
-import AllMember from './components/member';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+// import Fundraiser from './components/fundraiser';
+// import AllMember from './components/member';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
-import { Container } from '@chakra-ui/react';
 import Homepage from './pages/homepage';
+import AboutUs from './pages/about';
+import LatestCause from './pages/cause';
+import { Container } from '@chakra-ui/react';
 
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Container className='container' maxW={'100%'} m={'0px'} p={'0px'} mt={'6vh'} >
+    <BrowserRouter>
+      <Container maxW={'100vw'} overflowX={'hidden'} p='0px' m='0px'>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/fundraiser" element={<Fundraiser />} />
-          <Route path="*" element={<AllMember />} />
+          <Route path='/' element={<Homepage />} />
+          <Route path='/about' element={<AboutUs />} />
+          <Route path='/latest-cause' element={<LatestCause />} />
         </Routes>
         <Footer />
       </Container>
-    </Router>
+    </BrowserRouter>
   );
 }
 
