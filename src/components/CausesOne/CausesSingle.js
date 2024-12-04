@@ -12,10 +12,19 @@ const CausesSingle = ({ cause = {}, causePage }) => {
     }
   };
 
-  const { image, category, title, description, raised, goal } = cause;
-  const raisedNumber = +raised.split(",").join("");
-  const goalNumber = +goal.split(",").join("");
-  const percent = Math.round((raisedNumber / goalNumber) * 100);
+  const bufferToBase64 = (buffer) => {
+
+    const binary = Array.from(new Uint8Array(buffer))
+      .map((byte) => String.fromCharCode(byte))
+      .join('');
+    return `data:image/jpeg;base64,${btoa(binary)}`; // For JPEG, adjust if using another image format
+  };
+
+  const { coverImage: image, category, name: title, description, collectedAmount: raised, targetAmount: goal } = cause;
+
+  // const raisedNumber = +raised.split(",").join("");
+  // const goalNumber = +goal.split(",").join("");
+  const percent = 40;
 
   return (
     <div className={causePage ? "" : "my-4"}>
@@ -26,8 +35,10 @@ const CausesSingle = ({ cause = {}, causePage }) => {
         <div className="causes-one__img">
           <div className="causes-one__img-box">
             <Image
-              src={require(`@/images/resources/${image}`).default.src}
-              alt=""
+              src={bufferToBase64(image?.data)}
+              alt="Cover Image"
+          width={500}
+          height={300}
             />
             <Link href="/causes-details">
               <a>

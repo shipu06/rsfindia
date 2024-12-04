@@ -1,8 +1,9 @@
 import causesData from "@/data/causesData";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import CausesSingle from "../CausesOne/CausesSingle";
+import axios from "axios";
 const TinySlider = dynamic(() => import("tiny-slider-react"), { ssr: false });
 
 const settings = {
@@ -32,6 +33,29 @@ const settings = {
 };
 
 const CausesTwo = () => {
+  const [campaigns, setCampaigns] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchAllActiveCauses = async () => {
+      try {
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_URL + 'campaign');
+        if (isMounted) {
+          setCampaigns(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAllActiveCauses();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [0]);
+
   return (
     <section className="causes-two">
       <div className="container-box">
@@ -45,7 +69,7 @@ const CausesTwo = () => {
           <Col xl={12}>
             <div className="causes-two__carousel">
               <TinySlider settings={settings}>
-                {causesData.map((cause) => (
+                {campaigns.map((cause) => (
                   <CausesSingle cause={cause} key={cause.id} />
                 ))}
               </TinySlider>
